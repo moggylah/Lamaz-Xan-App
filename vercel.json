@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/my-masjid-api/:path*",
+      "destination": "https://time.my-masjid.com/:path*"
+    }
+  ]
+}
