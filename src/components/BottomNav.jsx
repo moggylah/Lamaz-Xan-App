@@ -16,17 +16,21 @@ const items = [
 export default function BottomNav({ view, onChange, language = 'ru' }) {
   return (
     <nav className="bottom-nav" aria-label={t(language, 'aria.sections')}>
-      {items.map(({ key, labelKey, Icon }) => (
-        <button
-          key={key}
-          type="button"
-          className={view === key ? 'active' : ''}
-          onClick={() => onChange(key)}
-        >
-          <Icon size={23} />
-          <span>{t(language, labelKey)}</span>
-        </button>
-      ))}
+      {items.map(({ key, labelKey, Icon }) => {
+        const active = view === key;
+        return (
+          <button
+            key={key}
+            type="button"
+            className={active ? 'active' : ''}
+            onClick={() => onChange(key)}
+            aria-current={active ? 'page' : undefined}
+          >
+            <span className="bottom-nav-icon"><Icon size={22} /></span>
+            <span className="bottom-nav-label">{t(language, labelKey)}</span>
+          </button>
+        );
+      })}
     </nav>
   );
 }

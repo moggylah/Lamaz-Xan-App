@@ -4,16 +4,8 @@ import { getLanguage, t } from '../lib/i18n.js';
 import { buildMonthSchedule, shiftMonth } from '../lib/monthly.js';
 import { downloadMonthlySchedulePdf } from '../lib/pdf.js';
 
-const prayerKeys = [
-  'fajr',
-  'sunrise',
-  'duha',
-  'dhuhr',
-  'asr',
-  'maghrib',
-  'isha',
-  'qiyam',
-];
+const mainPrayerKeys = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
+const secondaryKeys = ['sunrise', 'duha', 'qiyam'];
 
 export default function CalendarView({
   location,
@@ -80,88 +72,84 @@ export default function CalendarView({
 
   return (
     <section className="calendar-screen">
-      <div className="calendar-card">
-        <div className="calendar-header">
-          <button
-            type="button"
-            className="calendar-month-button"
-            onClick={() => changeMonth(-1)}
-            aria-label={t(language, 'calendar.previous')}
-          >
-            ‹
-          </button>
+      <div className="calendar-toolbar">
+        <button
+          type="button"
+          className="calendar-month-button"
+          onClick={() => changeMonth(-1)}
+          aria-label={t(language, 'calendar.previous')}
+        >
+          ‹
+        </button>
 
+        <div className="calendar-month-title">
           <h2>{monthTitle}</h2>
-
-          <button
-            type="button"
-            className="calendar-month-button"
-            onClick={() => changeMonth(1)}
-            aria-label={t(language, 'calendar.next')}
-          >
-            ›
-          </button>
+          <span>
+            {selectedMosque?.name
+              ? t(language, 'calendar.mosqueSource', { mosque: selectedMosque.name })
+              : t(language, 'calendar.calculatedSource')}
+          </span>
         </div>
 
-        <p className="calendar-subtitle">
-          {selectedMosque?.name
-            ? t(language, 'calendar.mosqueSource', { mosque: selectedMosque.name })
-            : t(language, 'calendar.calculatedSource')}
-        </p>
-
-        <div className="calendar-table-wrap">
-          <table className="calendar-table">
-            <thead>
-              <tr>
-                <th>{t(language, 'calendar.date')}</th>
-                {prayerKeys.map((key) => (
-                  <th key={key}>{t(language, `prayer.${key}`)}</th>
-                ))}
-              </tr>
-            </thead>
-
-            <tbody>
-              {rows.map((row) => {
-                const isToday =
-                  row.dateParts.year === todayParts.year &&
-                  row.dateParts.month === todayParts.month &&
-                  row.dateParts.day === todayParts.day;
-
-                const weekday = new Intl.DateTimeFormat(locale, {
-                  weekday: 'short',
-                  timeZone,
-                }).format(row.date);
-
-                return (
-                  <tr
-                    key={`${row.dateParts.year}-${row.dateParts.month}-${row.dateParts.day}`}
-                    className={isToday ? 'calendar-row-today' : ''}
-                  >
-                    <td>
-                      <span className="calendar-date-cell">
-                        <strong>{row.dateParts.day}</strong>
-                        <small>{weekday}</small>
-                      </span>
-                    </td>
-
-                    {prayerKeys.map((key) => (
-                      <td key={key}>
-                        {formatClock(row.times[key], timeZone, language)}
-                      </td>
-                    ))}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="calendar-actions">
-          <button type="button" className="pdf-button" onClick={downloadPdf}>
-            {t(language, 'calendar.downloadPdf')}
-          </button>
-        </div>
+        <button
+          type="button"
+          className="calendar-month-button"
+          onClick={() => changeMonth(1)}
+          aria-label={t(language, 'calendar.next')}
+        >
+          ›
+        </button>
       </div>
+
+      <div className="calendar-list">
+        {rows.map((row) => {
+          const isToday =
+            row.dateParts.year === todayParts.year &&
+            row.dateParts.month === todayParts.month &&
+            row.dateParts.day === todayParts.day;
+
+          const weekday = new Intl.DateTimeFormat(locale, {
+            weekday: 'short',
+            timeZone,
+          }).format(row.date);
+
+          return (
+            <article
+              key={`${row.dateParts.year}-${row.dateParts.month}-${row.dateParts.day}`}
+              className={`calendar-day ${isToday ? 'is-today' : ''}`}
+            >
+              <div className="calendar-day-date">
+                <strong>{row.dateParts.day}</strong>
+                <span>{weekday}</span>
+              </div>
+
+              <div className="calendar-day-times">
+                <div className="calendar-main-times">
+                  {mainPrayerKeys.map((key) => (
+                    <div className="calendar-time" key={key}>
+                      <span>{t(language, `prayer.${key}`)}</span>
+                      <strong>{formatClock(row.times[key], timeZone, language)}</strong>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="calendar-secondary-times">
+                  {secondaryKeys.map((key) => (
+                    <div key={key}>
+                      <span>{t(language, `prayer.${key}`)}</span>
+                      <strong>{formatClock(row.times[key], timeZone, language)}</strong>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <button type="button" className="pdf-button calendar-pdf-button" onClick={downloadPdf}>
+        {t(language, 'calendar.downloadPdf')}
+      </button>
     </section>
   );
 }
