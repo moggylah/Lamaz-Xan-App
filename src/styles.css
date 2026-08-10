@@ -1056,3 +1056,1029 @@ button { -webkit-tap-highlight-color: transparent; }
   .bottom-nav button { min-height: 54px; }
   .bottom-nav button span { font-size: 9.5px; }
 }
+
+.app-frame {
+  padding: max(18px, env(safe-area-inset-top)) 16px max(18px, env(safe-area-inset-bottom));
+}
+
+.app-header {
+  margin: 0 0 14px;
+  min-height: 0;
+}
+
+.app-header-home {
+  display: block;
+}
+
+.brand-row {
+  position: relative;
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-row .header-logo {
+  width: 132px;
+  max-height: 54px;
+  object-fit: contain;
+  filter: none;
+}
+
+.brand-row .settings-button {
+  position: absolute;
+  inset-inline-end: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.icon-button {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid rgba(23,79,58,.08);
+  background: rgba(255,255,255,.48);
+  box-shadow: 0 5px 14px rgba(36,54,44,.035);
+}
+
+.icon-button:active {
+  background: var(--green-soft);
+}
+
+.date-panel {
+  width: fit-content;
+  min-width: 178px;
+  margin: 2px auto 0;
+  padding: 8px 17px 9px;
+  border-radius: 18px;
+  text-align: center;
+  background: rgba(255,255,255,.42);
+  border: 1px solid rgba(229,224,214,.82);
+}
+
+.date-primary {
+  color: #26302b;
+  font-size: 13px;
+  font-weight: 620;
+}
+
+.date-secondary {
+  margin-top: 2px;
+  color: #69716c;
+  font-size: 11.5px;
+}
+
+.date-weekday {
+  margin-top: 3px;
+  color: var(--green);
+  font-size: 10.5px;
+  font-weight: 650;
+  text-transform: capitalize;
+}
+
+.app-header-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 62px;
+}
+
+.section-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.section-brand-mark {
+  width: 36px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.section-brand-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.section-brand-copy span {
+  color: #949b96;
+  font-size: 9.5px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.section-brand-copy strong {
+  color: var(--green);
+  font-size: 20px;
+  line-height: 1.15;
+  font-weight: 680;
+}
+
+.prayer-screen {
+  padding-bottom: 2px;
+}
+
+.next-prayer-card {
+  min-height: 158px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(225,220,210,.9);
+  border-radius: 24px;
+  padding: 22px 20px;
+  background: linear-gradient(145deg, rgba(255,255,255,.8), rgba(246,243,235,.96));
+  box-shadow: 0 16px 38px rgba(41,52,45,.075);
+}
+
+.next-prayer-copy,
+.next-prayer-countdown {
+  position: relative;
+  z-index: 2;
+}
+
+.next-prayer-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.next-label,
+.countdown-label,
+.next-at {
+  color: #7d847f;
+  font-size: 11.5px;
+}
+
+.next-name {
+  margin: 5px 0 7px;
+  color: var(--green);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.next-at {
+  font-size: 10.5px;
+}
+
+.next-prayer-countdown {
+  min-width: 116px;
+  padding: 13px 14px;
+  border-radius: 18px;
+  text-align: center;
+  background: rgba(23,79,58,.06);
+}
+
+.countdown-label {
+  display: block;
+  margin-bottom: 3px;
+  color: #728078;
+}
+
+.countdown {
+  display: block;
+  color: var(--green);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+.next-prayer-watermark {
+  position: absolute;
+  inset-inline-end: -24px;
+  bottom: -30px;
+  color: var(--green);
+  opacity: .035;
+  transform: rotate(-12deg);
+}
+
+.schedule-heading {
+  min-height: 54px;
+  margin-top: 12px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.schedule-heading > div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.schedule-heading strong {
+  color: #2b342f;
+  font-size: 15px;
+  font-weight: 670;
+}
+
+.schedule-heading span {
+  max-width: 285px;
+  color: #8a918c;
+  font-size: 9.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.schedule-source-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 5px rgba(23,79,58,.08);
+}
+
+.prayer-list {
+  padding: 5px;
+  border: 1px solid rgba(229,224,214,.88);
+  border-radius: 22px;
+  background: rgba(255,255,255,.46);
+  overflow: visible;
+}
+
+.prayer-row {
+  min-height: 54px;
+  padding: 0 11px;
+  border-radius: 15px;
+  border-bottom: 0;
+}
+
+.prayer-row + .prayer-row {
+  margin-top: 1px;
+}
+
+.prayer-title-wrap {
+  gap: 12px;
+}
+
+.prayer-time-wrap {
+  gap: 12px;
+}
+
+.prayer-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  background: rgba(23,79,58,.055);
+}
+
+.prayer-name,
+.prayer-time {
+  font-size: 16px;
+}
+
+.fard-prayer .prayer-name,
+.fard-prayer .prayer-time {
+  font-weight: 600;
+}
+
+.secondary-prayer {
+  min-height: 41px;
+}
+
+.secondary-prayer .prayer-icon {
+  width: 25px;
+  height: 25px;
+  background: transparent;
+}
+
+.secondary-prayer .prayer-name,
+.secondary-prayer .prayer-time {
+  font-size: 12.5px;
+}
+
+.prayer-row.is-next {
+  background: linear-gradient(90deg, rgba(225,238,226,.95), rgba(237,244,236,.92));
+  box-shadow: inset 3px 0 0 var(--green);
+}
+
+[dir="rtl"] .prayer-row.is-next {
+  box-shadow: inset -3px 0 0 var(--green);
+}
+
+.bottom-nav {
+  margin-top: 14px;
+  padding: 6px;
+  gap: 4px;
+  border-radius: 22px;
+  background: rgba(255,253,248,.9);
+  border: 1px solid rgba(224,219,209,.92);
+  box-shadow: 0 12px 28px rgba(43,54,47,.07);
+}
+
+.bottom-nav button {
+  min-height: 62px;
+  border-radius: 16px;
+  gap: 4px;
+  color: #8a918c;
+}
+
+.bottom-nav-icon {
+  width: 34px;
+  height: 30px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  transition: .18s ease;
+}
+
+.bottom-nav-label {
+  font-size: 9.5px !important;
+  font-weight: 560;
+}
+
+.bottom-nav button.active {
+  background: transparent;
+  color: var(--green);
+}
+
+.bottom-nav button.active .bottom-nav-icon {
+  background: var(--green-soft);
+  box-shadow: inset 0 0 0 1px rgba(23,79,58,.06);
+}
+
+.bottom-nav button.active .bottom-nav-label {
+  font-weight: 700;
+}
+
+.qibla-screen {
+  min-height: 0;
+  padding: 2px 0 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qibla-guide-card {
+  width: min(100%, 340px);
+  min-height: 62px;
+  margin: 2px 0 14px;
+  padding: 11px 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.5);
+  border: 1px solid rgba(226,221,211,.88);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition: .2s ease;
+}
+
+.qibla-guide-card.is-aligned {
+  background: rgba(230,240,231,.92);
+  border-color: rgba(23,79,58,.18);
+}
+
+.qibla-guide-label {
+  color: #59635d;
+  font-size: 11.5px;
+  text-align: center;
+  line-height: 1.35;
+}
+
+.qibla-guide-scale {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+  color: var(--green);
+}
+
+.qibla-guide-scale span {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(23,79,58,.24));
+}
+
+.qibla-guide-scale span:last-child {
+  background: linear-gradient(90deg, rgba(23,79,58,.24), transparent);
+}
+
+.qibla-guide-scale strong {
+  min-width: 48px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 720;
+}
+
+.compass-clean {
+  width: min(82vw, 330px);
+  padding: 6px;
+  background: #f1eee6;
+  box-shadow: 0 18px 40px rgba(42,50,45,.11), inset 0 0 0 1px rgba(23,79,58,.06);
+}
+
+.compass-clean.is-aligned {
+  box-shadow: 0 18px 42px rgba(23,79,58,.15), 0 0 0 4px rgba(23,79,58,.055);
+}
+
+.compass-clean .compass-face {
+  background: radial-gradient(circle at 50% 48%, #fffefb 0 57%, #f3f0e8 100%);
+  border-color: #ded9cf;
+}
+
+.compass-clean .compass-face::before,
+.compass-clean .compass-pattern,
+.compass-clean .north-marker,
+.compass-clean .qibla-needle,
+.compass-clean .needle-pivot,
+.compass-clean .qibla-target-dot,
+.compass-clean .qibla-marker {
+  display: none;
+}
+
+.compass-inner-ring {
+  position: absolute;
+  inset: 20%;
+  border-radius: 50%;
+  border: 1px solid rgba(23,79,58,.07);
+  box-shadow: inset 0 0 0 12px rgba(23,79,58,.012);
+}
+
+.compass-clean .compass-ticks {
+  inset: 11px;
+  opacity: .48;
+  -webkit-mask: radial-gradient(circle, transparent 0 86%, #000 86% 89%, transparent 89%);
+  mask: radial-gradient(circle, transparent 0 86%, #000 86% 89%, transparent 89%);
+}
+
+.compass-clean .cardinal {
+  font-family: Inter, ui-sans-serif, sans-serif;
+  font-size: 15px;
+  font-weight: 650;
+  color: #5d665f;
+  z-index: 3;
+}
+
+.compass-clean .cardinal.north {
+  color: var(--green);
+  font-weight: 800;
+}
+
+.qibla-top-target {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 58px;
+  height: 58px;
+  transform: translate(-50%, -31%);
+  display: grid;
+  place-items: center;
+  z-index: 8;
+  color: var(--green);
+  pointer-events: none;
+}
+
+.qibla-top-target > span {
+  width: 10px;
+  height: 10px;
+  margin-top: 30px;
+  border-radius: 50%;
+  background: #c6cec8;
+  box-shadow: 0 0 0 6px rgba(23,79,58,.035);
+}
+
+.qibla-top-target.is-visible {
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  background: var(--green);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(23,79,58,.24);
+  animation: qiblaFound .22s ease-out;
+}
+
+.compass-north-pointer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+  z-index: 5;
+  transition: transform .12s linear;
+}
+
+.compass-arrow {
+  position: absolute;
+  left: -8px;
+  bottom: 0;
+  width: 16px;
+  height: 95px;
+  clip-path: polygon(50% 0, 100% 100%, 50% 88%, 0 100%);
+  background: linear-gradient(90deg, #153d2d, #3f8468 52%, #174632);
+  filter: drop-shadow(0 5px 5px rgba(23,79,58,.18));
+}
+
+.compass-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 33px;
+  height: 33px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #fffdf8;
+  border: 2px solid var(--green);
+  box-shadow: 0 4px 12px rgba(24,55,41,.13);
+  z-index: 7;
+  display: grid;
+  place-items: center;
+}
+
+.compass-center span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.qibla-readout {
+  width: min(100%, 330px);
+  margin-top: 18px;
+  min-height: 58px;
+  padding: 9px 15px;
+  border-radius: 18px;
+  border: 1px solid rgba(226,221,211,.9);
+  background: rgba(255,255,255,.48);
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.qibla-readout.is-aligned {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+}
+
+.qibla-readout-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.qibla-readout-main strong {
+  font-size: 14px;
+  font-weight: 680;
+}
+
+.qibla-readout-main span {
+  color: #8a918c;
+  font-size: 9.5px;
+}
+
+.qibla-readout.is-aligned .qibla-readout-main span {
+  color: rgba(255,255,255,.72);
+}
+
+.compass-activate {
+  margin-top: 12px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 14px;
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+}
+
+.sensor-note {
+  max-width: 330px;
+  margin-top: 12px;
+  font-size: 10.5px;
+}
+
+.calendar-screen {
+  min-height: 0;
+  padding: 2px 0 8px;
+}
+
+.calendar-toolbar {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 42px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 20px;
+  background: rgba(255,255,255,.5);
+  border: 1px solid rgba(226,221,211,.88);
+}
+
+.calendar-month-title {
+  min-width: 0;
+  text-align: center;
+}
+
+.calendar-month-title h2 {
+  margin: 0;
+  color: var(--green);
+  font-size: 17px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.calendar-month-title span {
+  display: block;
+  margin-top: 3px;
+  color: #8a918c;
+  font-size: 8.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calendar-month-button {
+  width: 38px;
+  height: 38px;
+  border-radius: 13px;
+  background: var(--green-soft);
+}
+
+.calendar-list {
+  display: grid;
+  gap: 7px;
+}
+
+.calendar-day {
+  display: grid;
+  grid-template-columns: 45px minmax(0, 1fr);
+  gap: 9px;
+  padding: 10px;
+  border-radius: 17px;
+  border: 1px solid rgba(229,224,214,.82);
+  background: rgba(255,255,255,.42);
+}
+
+.calendar-day.is-today {
+  border-color: rgba(23,79,58,.2);
+  background: rgba(231,240,232,.86);
+  box-shadow: inset 3px 0 0 var(--green);
+}
+
+[dir="rtl"] .calendar-day.is-today {
+  box-shadow: inset -3px 0 0 var(--green);
+}
+
+.calendar-day-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-inline-end: 1px solid var(--line);
+}
+
+.calendar-day-date strong {
+  color: #26312b;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.calendar-day-date span {
+  margin-top: 4px;
+  color: #959c97;
+  font-size: 9px;
+  text-transform: capitalize;
+}
+
+.calendar-day-times {
+  min-width: 0;
+}
+
+.calendar-main-times {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 2px;
+}
+
+.calendar-time {
+  min-width: 0;
+  text-align: center;
+}
+
+.calendar-time span,
+.calendar-secondary-times span {
+  display: block;
+  color: #8f9691;
+  font-size: 7.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calendar-time strong {
+  display: block;
+  margin-top: 2px;
+  color: #27322c;
+  font-size: 11.5px;
+  font-weight: 680;
+}
+
+.calendar-secondary-times {
+  margin-top: 7px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(230,225,215,.8);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.calendar-secondary-times div {
+  text-align: center;
+}
+
+.calendar-secondary-times strong {
+  display: block;
+  margin-top: 1px;
+  color: #7a827d;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.calendar-pdf-button {
+  width: 100%;
+  margin-top: 12px;
+  min-height: 48px;
+  border-radius: 16px;
+}
+
+.azkar-screen {
+  min-height: 0;
+  padding: 2px 0 8px;
+}
+
+.azkar-overview {
+  margin-bottom: 10px;
+  padding: 14px 15px;
+  border-radius: 20px;
+  background: rgba(255,255,255,.5);
+  border: 1px solid rgba(226,221,211,.88);
+}
+
+.azkar-overview-copy {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.azkar-overview h2 {
+  margin: 0;
+  color: var(--green);
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.azkar-overview p {
+  margin: 4px 0 0;
+  color: #8c938e;
+  font-size: 9.5px;
+}
+
+.azkar-overview-copy > strong {
+  color: var(--green);
+  font-size: 18px;
+  font-weight: 720;
+}
+
+.azkar-progress {
+  height: 5px;
+  margin-top: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #e5e8e4;
+}
+
+.azkar-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--green);
+  transition: width .22s ease;
+}
+
+.azkar-category-tabs {
+  min-height: 46px;
+  margin-bottom: 7px;
+  padding: 4px;
+  border-radius: 16px;
+}
+
+.azkar-category-tabs button {
+  min-height: 38px;
+  padding: 5px 7px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.azkar-category-tabs button.active {
+  font-weight: 700;
+}
+
+.azkar-category-meta {
+  min-height: 36px;
+  padding: 0 7px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.azkar-category-meta span {
+  color: #8e9590;
+  font-size: 9px;
+}
+
+.azkar-category-meta button {
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  color: var(--green);
+  font-size: 9px;
+  font-weight: 680;
+  cursor: pointer;
+}
+
+.azkar-list {
+  gap: 9px;
+}
+
+.azkar-item {
+  padding: 15px;
+  border-radius: 20px;
+  background: rgba(255,253,248,.84);
+  box-shadow: 0 7px 20px rgba(43,54,47,.035);
+}
+
+.azkar-item.complete {
+  opacity: .78;
+  background: rgba(235,243,236,.88);
+}
+
+.azkar-item h3 {
+  font-size: 14px;
+}
+
+.azkar-repeat-label {
+  min-width: 34px;
+  min-height: 25px;
+  font-size: 10px;
+}
+
+.azkar-arabic {
+  margin: 15px 0 10px;
+  font-size: 23px;
+  line-height: 1.95;
+}
+
+.azkar-meaning {
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+
+.azkar-meta {
+  margin-top: 10px;
+  padding-top: 8px;
+  font-size: 9px;
+}
+
+.azkar-counter-row {
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+.azkar-counter {
+  width: 64px;
+  height: 64px;
+  padding: 3px;
+  background: conic-gradient(var(--green) var(--counter-progress, 0deg), #e1e6e1 0deg);
+  box-shadow: 0 7px 18px rgba(23,79,58,.12);
+}
+
+.azkar-counter-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--green);
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+
+.azkar-counter.done {
+  background: #a9b9ad;
+}
+
+.azkar-counter.done .azkar-counter-inner {
+  background: #829c89;
+}
+
+.settings-cards {
+  margin-top: 26px;
+  gap: 8px;
+}
+
+.settings-row-card {
+  min-height: 84px;
+  border-radius: 18px;
+  grid-template-columns: 50px 1fr 24px;
+  padding: 12px;
+}
+
+.settings-leading {
+  width: 40px;
+  height: 40px;
+}
+
+.settings-text {
+  gap: 3px;
+}
+
+.settings-text strong {
+  font-size: 15px;
+  font-weight: 620;
+}
+
+.settings-text small {
+  font-size: 11px;
+}
+
+.language-card {
+  min-height: 64px;
+  border-radius: 18px;
+  grid-template-columns: 50px 1fr 26px;
+  padding: 8px 12px;
+}
+
+.language-select {
+  font-size: 15px;
+}
+
+@media (max-width: 380px) {
+  .app-frame {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .brand-row .header-logo {
+    width: 122px;
+  }
+
+  .date-panel {
+    min-width: 166px;
+  }
+
+  .next-prayer-card {
+    grid-template-columns: minmax(0, 1fr) 105px;
+    gap: 10px;
+    padding: 19px 16px;
+  }
+
+  .next-name {
+    font-size: 27px;
+  }
+
+  .countdown {
+    font-size: 19px;
+  }
+
+  .calendar-day {
+    grid-template-columns: 40px minmax(0, 1fr);
+    padding: 9px 8px;
+    gap: 7px;
+  }
+
+  .calendar-time strong {
+    font-size: 10.5px;
+  }
+
+  .calendar-time span,
+  .calendar-secondary-times span {
+    font-size: 7px;
+  }
+
+  .azkar-counter-row {
+    grid-template-columns: 58px minmax(0, 1fr) auto;
+  }
+
+  .azkar-counter {
+    width: 58px;
+    height: 58px;
+  }
+}
