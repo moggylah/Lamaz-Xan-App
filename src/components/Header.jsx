@@ -1,5 +1,5 @@
 import BrandLogo from './BrandLogo.jsx';
-import { GearIcon } from './Icons.jsx';
+import { BackIcon, GearIcon } from './Icons.jsx';
 import { t } from '../lib/i18n.js';
 
 const titleKeys = {
@@ -8,7 +8,7 @@ const titleKeys = {
   calendar: 'tab.calendar',
 };
 
-export default function Header({ dates, onSettings, language = 'ru', view = 'prayers' }) {
+export default function Header({ dates, onSettings, onHome, language = 'ru', view = 'prayers' }) {
   if (view === 'prayers') {
     return (
       <header className="app-header app-header-home">
@@ -35,6 +35,15 @@ export default function Header({ dates, onSettings, language = 'ru', view = 'pra
 
   return (
     <header className="app-header app-header-section">
+      <button
+        type="button"
+        className="icon-button section-back-button"
+        onClick={onHome}
+        aria-label={t(language, 'tab.prayers')}
+      >
+        <BackIcon size={25} />
+      </button>
+
       <div className="section-brand">
         <BrandLogo variant="mark" className="section-brand-mark" />
         <div className="section-brand-copy">
