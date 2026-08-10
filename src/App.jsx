@@ -240,7 +240,13 @@ export default function App() {
 
   return (
     <main className="app-frame">
-      <Header dates={dates} view={view} onSettings={() => setView('settings')} language={language}/>
+      <Header
+        dates={dates}
+        view={view}
+        onHome={() => setView('prayers')}
+        onSettings={() => setView('settings')}
+        language={language}
+      />
 
       {view === 'prayers' && (
         <PrayerTimesView

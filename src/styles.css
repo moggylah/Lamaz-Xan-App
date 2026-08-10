@@ -2082,3 +2082,40 @@ button { -webkit-tap-highlight-color: transparent; }
     height: 58px;
   }
 }
+
+.app-header-section {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 42px;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-back-button {
+  justify-self: start;
+}
+
+.app-header-section .section-brand {
+  justify-self: center;
+  min-width: 0;
+}
+
+.app-header-section .settings-button {
+  justify-self: end;
+}
+
+[dir="rtl"] .section-back-button svg {
+  transform: scaleX(-1);
+}
+
+.bottom-nav {
+  position: sticky;
+  bottom: max(8px, env(safe-area-inset-bottom));
+  z-index: 40;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.calendar-screen,
+.azkar-screen {
+  padding-bottom: 10px;
+}
