@@ -1,5 +1,5 @@
-import { formatClock } from './date.js';
-import { getLanguage, t } from './i18n.js';
+import { formatClock, formatMonthTitle, formatWeekday } from './date.js';
+import { t } from './i18n.js';
 
 function concatBytes(chunks) {
   const total = chunks.reduce((sum, chunk) => sum + chunk.length, 0);
@@ -116,13 +116,7 @@ export function downloadMonthlySchedulePdf({
   language,
   sourceName = '',
 }) {
-  const locale = getLanguage(language).locale;
-  const monthDate = new Date(Date.UTC(year, month - 1, 1));
-  const monthTitle = new Intl.DateTimeFormat(locale, {
-    month: 'long',
-    year: 'numeric',
-    timeZone: 'UTC',
-  }).format(monthDate);
+  const monthTitle = formatMonthTitle(year, month, language);
 
   const width = 2400;
   const height = 1697;
@@ -203,10 +197,7 @@ export function downloadMonthlySchedulePdf({
       ctx.fillRect(left, y, tableWidth, rowHeight);
     }
 
-    const weekday = new Intl.DateTimeFormat(locale, {
-      weekday: 'short',
-      timeZone,
-    }).format(row.date);
+    const weekday = formatWeekday(row.date, timeZone, language, true);
 
     const values = [
       `${row.dateParts.day} ${weekday}`,

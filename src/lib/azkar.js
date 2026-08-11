@@ -469,9 +469,11 @@ export const AZKAR = {
 };
 
 export function getAzkarMeaning(item, language) {
+  if (language === 'ce') return item.meaning?.ru || item.meaning?.en || '';
   return item.meaning?.[language] || item.meaning?.en || item.meaning?.ru || '';
 }
 
 export function getAzkarName(item, language) {
+  if (language === 'ce') return item.name?.ru || item.name?.en || '';
   return item.name?.[language] || item.name?.en || item.name?.ru || '';
 }

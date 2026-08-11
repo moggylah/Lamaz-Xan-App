@@ -21,11 +21,36 @@ const MONTHS = {
     gregorian: ['ene.', 'feb.', 'mar.', 'abr.', 'may.', 'jun.', 'jul.', 'ago.', 'sept.', 'oct.', 'nov.', 'dic.'],
     hijri: ['Muh.', 'Saf.', 'Rab. I', 'Rab. II', 'Yum. I', 'Yum. II', 'Ray.', 'Shaab.', 'Ram.', 'Shaw.', 'Dhu al-Q.', 'Dhu al-H.'],
   },
+  ce: {
+    gregorian: ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr'],
+    hijri: ['Muharram', 'Safar', 'Rabi I', 'Rabi II', 'Jumada I', 'Jumada II', 'Rajab', 'Shaaban', 'Ramadan', 'Shawwal', 'Dhul-Qada', 'Dhul-Hijja'],
+  },
   ar: {
     gregorian: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
     hijri: ['محرم', 'صفر', 'ربيع ١', 'ربيع ٢', 'جمادى ١', 'جمادى ٢', 'رجب', 'شعبان', 'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'],
   },
 };
+
+const CE_WEEKDAYS_LONG = ['Khirande', 'Oršot', 'Šinar', 'Qaara', 'Yeara', 'Pheraskande', 'Šotde'];
+const CE_WEEKDAYS_SHORT = ['Khir.', 'Orš.', 'Šin.', 'Qaa.', 'Yea.', 'Pher.', 'Šot.'];
+
+function weekdayIndex(date, timeZone) {
+  const value = new Intl.DateTimeFormat('en-US', { weekday: 'short', timeZone }).format(date);
+  return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(value);
+}
+
+export function formatWeekday(date, timeZone, language = 'ru', short = false) {
+  if (language === 'ce') {
+    const index = weekdayIndex(date, timeZone);
+    return (short ? CE_WEEKDAYS_SHORT : CE_WEEKDAYS_LONG)[index] || '';
+  }
+  return new Intl.DateTimeFormat(getLanguage(language).locale, { weekday: short ? 'short' : 'long', timeZone }).format(date);
+}
+
+export function formatMonthTitle(year, month, language = 'ru') {
+  if (language === 'ce') return `${MONTHS.ce.gregorian[month - 1]} ${year}`;
+  return new Intl.DateTimeFormat(getLanguage(language).locale, { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(Date.UTC(year, month - 1, 1)));
+}
 
 function numericParts(date, timeZone, calendar = 'gregory') {
   const parts = new Intl.DateTimeFormat(`en-u-ca-${calendar}-nu-latn`, {
@@ -45,7 +70,7 @@ export function getDateDisplay(date, timeZone, language = 'ru') {
   return {
     gregorian: `${greg.day} ${MONTHS[code].gregorian[greg.month - 1]} ${greg.year}`,
     hijri: `${hijri.day} ${MONTHS[code].hijri[hijri.month - 1]} ${hijri.year}`,
-    weekday: new Intl.DateTimeFormat(locale, { weekday: 'long', timeZone }).format(date),
+    weekday: formatWeekday(date, timeZone, code, false),
   };
 }
 
