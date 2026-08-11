@@ -108,12 +108,11 @@ export default function AzkarView({ language = 'ru', hapticsEnabled = true }) {
   }
 
   function handleTouchStart(event) {
-    const touch = event.changedTouches?.[0];
+    const touch = event.touches?.[0] || event.changedTouches?.[0];
     if (!touch) return;
     touchStartRef.current = {
       x: touch.clientX,
       y: touch.clientY,
-      ignoreSwipe: Boolean(event.target?.closest?.('.azkar-scroll-area')),
     };
   }
 
@@ -121,13 +120,15 @@ export default function AzkarView({ language = 'ru', hapticsEnabled = true }) {
     const start = touchStartRef.current;
     const touch = event.changedTouches?.[0];
     touchStartRef.current = null;
-    if (!start || !touch || start.ignoreSwipe) return;
+    if (!start || !touch) return;
 
     const dx = touch.clientX - start.x;
     const dy = touch.clientY - start.y;
+    const horizontalDistance = Math.abs(dx);
+    const verticalDistance = Math.abs(dy);
 
-    if (Math.abs(dx) < 56) return;
-    if (Math.abs(dx) <= Math.abs(dy) * 1.35) return;
+    if (horizontalDistance < 48) return;
+    if (horizontalDistance <= verticalDistance * 1.2) return;
 
     if (dx < 0) goTo(currentIndex + 1);
     else goTo(currentIndex - 1);

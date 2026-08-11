@@ -23,7 +23,7 @@ export default function CalendarView({
     year: todayParts.year,
     month: todayParts.month,
   });
-  const [page, setPage] = useState(0);
+  const [startIndex, setStartIndex] = useState(() => Math.max(0, todayParts.day - 1));
   const touchStartRef = useRef(null);
 
   const rows = useMemo(
@@ -52,8 +52,12 @@ export default function CalendarView({
   );
 
   useEffect(() => {
-    setPage(0);
-  }, [monthState.year, monthState.month]);
+    const isCurrentMonth =
+      monthState.year === todayParts.year &&
+      monthState.month === todayParts.month;
+
+    setStartIndex(isCurrentMonth ? Math.max(0, todayParts.day - 1) : 0);
+  }, [monthState.year, monthState.month, todayParts.year, todayParts.month, todayParts.day]);
 
   const locale = getLanguage(language).locale;
   const monthTitle = new Intl.DateTimeFormat(locale, {
@@ -62,17 +66,18 @@ export default function CalendarView({
     timeZone: 'UTC',
   }).format(new Date(Date.UTC(monthState.year, monthState.month - 1, 1)));
 
-  const pageCount = Math.max(1, Math.ceil(rows.length / pageSize));
-  const safePage = Math.min(page, pageCount - 1);
-  const startIndex = safePage * pageSize;
-  const visibleRows = rows.slice(startIndex, startIndex + pageSize);
+  const safeStartIndex = Math.max(0, Math.min(startIndex, Math.max(0, rows.length - 1)));
+  const visibleRows = rows.slice(safeStartIndex, safeStartIndex + pageSize);
 
   function changeMonth(amount) {
     setMonthState((current) => shiftMonth(current.year, current.month, amount));
   }
 
   function changePage(amount) {
-    setPage((current) => Math.max(0, Math.min(pageCount - 1, current + amount)));
+    setStartIndex((current) => {
+      const next = current + amount * pageSize;
+      return Math.max(0, Math.min(Math.max(0, rows.length - 1), next));
+    });
   }
 
   function handleTouchStart(event) {
@@ -141,7 +146,7 @@ export default function CalendarView({
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="calendar-list" key={`${monthState.year}-${monthState.month}-${safePage}`}>
+        <div className="calendar-list" key={`${monthState.year}-${monthState.month}-${safeStartIndex}`}>
           {visibleRows.map((row) => {
             const isToday =
               row.dateParts.year === todayParts.year &&
