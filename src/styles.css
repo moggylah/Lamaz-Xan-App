@@ -2840,3 +2840,33 @@ button { -webkit-tap-highlight-color: transparent; }
     padding-bottom: 9px;
   }
 }
+
+
+/* Seven-day calendar + full-width azkar cards */
+.calendar-days-toolbar {
+  display: none !important;
+}
+
+.azkar-swipe-stage {
+  display: block;
+  width: 100%;
+  touch-action: pan-y;
+}
+
+.azkar-slide {
+  width: 100%;
+}
+
+.azkar-page-button {
+  display: none !important;
+}
+
+.azkar-scroll-area {
+  touch-action: pan-y;
+}
+
+@media (max-width: 380px) {
+  .azkar-swipe-stage {
+    display: block;
+  }
+}
