@@ -31,7 +31,7 @@ export default function AzkarView({ language = 'ru', hapticsEnabled = true }) {
   const [category, setCategory] = useState('morning');
   const [remaining, setRemaining] = useState(readCounters);
   const [currentIndex, setCurrentIndex] = useState(() => firstIncompleteIndex('morning', AZKAR.morning, readCounters()));
-  const touchStartX = useRef(null);
+  const touchStartRef = useRef(null);
   const advanceTimer = useRef(null);
   const scrollAreaRef = useRef(null);
 
@@ -108,17 +108,24 @@ export default function AzkarView({ language = 'ru', hapticsEnabled = true }) {
   }
 
   function handleTouchStart(event) {
-    touchStartX.current = event.changedTouches?.[0]?.clientX ?? null;
+    const touch = event.changedTouches?.[0];
+    if (!touch) return;
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
   }
 
   function handleTouchEnd(event) {
-    const start = touchStartX.current;
-    const end = event.changedTouches?.[0]?.clientX;
-    touchStartX.current = null;
-    if (start == null || end == null) return;
-    const delta = end - start;
-    if (Math.abs(delta) < 48) return;
-    if (delta < 0) goTo(currentIndex + 1);
+    const start = touchStartRef.current;
+    const touch = event.changedTouches?.[0];
+    touchStartRef.current = null;
+    if (!start || !touch) return;
+
+    const dx = touch.clientX - start.x;
+    const dy = touch.clientY - start.y;
+
+    if (Math.abs(dx) < 56) return;
+    if (Math.abs(dx) <= Math.abs(dy) * 1.35) return;
+
+    if (dx < 0) goTo(currentIndex + 1);
     else goTo(currentIndex - 1);
   }
 
@@ -162,16 +169,6 @@ export default function AzkarView({ language = 'ru', hapticsEnabled = true }) {
       </div>
 
       <div className="azkar-swipe-stage" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-        <button
-          type="button"
-          className="azkar-page-button azkar-page-prev"
-          onClick={() => goTo(currentIndex - 1)}
-          disabled={currentIndex === 0}
-          aria-label={t(language, 'azkar.previous')}
-        >
-          ‹
-        </button>
-
         <article className={`azkar-slide ${complete ? 'complete' : ''}`} key={`${category}-${currentItem.id}`}>
           <div className="azkar-slide-topline">
             <div>
@@ -226,15 +223,6 @@ export default function AzkarView({ language = 'ru', hapticsEnabled = true }) {
           </div>
         </article>
 
-        <button
-          type="button"
-          className="azkar-page-button azkar-page-next"
-          onClick={() => goTo(currentIndex + 1)}
-          disabled={currentIndex === items.length - 1}
-          aria-label={t(language, 'azkar.next')}
-        >
-          ›
-        </button>
       </div>
 
       <div className="azkar-dots" aria-label={t(language, 'azkar.position', { current: currentIndex + 1, total: items.length })}>

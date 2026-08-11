@@ -6,7 +6,7 @@ import { downloadMonthlySchedulePdf } from '../lib/pdf.js';
 
 const mainPrayerKeys = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
 const secondaryKeys = ['sunrise', 'duha', 'qiyam'];
-const pageSize = 5;
+const pageSize = 7;
 
 export default function CalendarView({
   location,
@@ -131,28 +131,6 @@ export default function CalendarView({
           className="calendar-month-button"
           onClick={() => changeMonth(1)}
           aria-label={t(language, 'calendar.next')}
-        >
-          ›
-        </button>
-      </div>
-
-      <div className="calendar-days-toolbar">
-        <button
-          type="button"
-          className="calendar-days-button"
-          onClick={() => changePage(-1)}
-          disabled={safePage === 0}
-          aria-label="Previous days"
-        >
-          ‹
-        </button>
-
-        <button
-          type="button"
-          className="calendar-days-button"
-          onClick={() => changePage(1)}
-          disabled={safePage >= pageCount - 1}
-          aria-label="Next days"
         >
           ›
         </button>
