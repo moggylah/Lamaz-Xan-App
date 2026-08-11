@@ -2870,3 +2870,55 @@ button { -webkit-tap-highlight-color: transparent; }
     display: block;
   }
 }
+
+
+/* Azkar layout hotfix: full-width card, no collapsed grid column */
+.azkar-screen > .azkar-swipe-stage {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  grid-template-columns: none !important;
+  gap: 0 !important;
+  overflow: visible !important;
+}
+
+.azkar-screen > .azkar-swipe-stage > .azkar-slide {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) auto !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  height: clamp(390px, calc(100dvh - 330px), 560px);
+  overflow: hidden !important;
+}
+
+.azkar-screen .azkar-scroll-area {
+  min-width: 0;
+  width: 100%;
+  min-height: 0;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  touch-action: pan-y !important;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.azkar-screen .azkar-slide-topline,
+.azkar-screen .azkar-counter-zone {
+  width: 100%;
+  min-width: 0;
+}
+
+.azkar-screen .azkar-page-button {
+  display: none !important;
+}
+
+@media (max-width: 380px) {
+  .azkar-screen > .azkar-swipe-stage > .azkar-slide {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    height: clamp(380px, calc(100dvh - 315px), 530px);
+  }
+}
