@@ -270,7 +270,7 @@ export default function App() {
       )}
 
       {view === 'azkar' && (
-        <AzkarView language={language}/>
+        <AzkarView language={language} hapticsEnabled={notificationPrefs.vibration !== false}/>
       )}
 
       {view === 'calendar' && (
