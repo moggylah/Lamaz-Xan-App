@@ -66,8 +66,6 @@ export default function CalendarView({
   const safePage = Math.min(page, pageCount - 1);
   const startIndex = safePage * pageSize;
   const visibleRows = rows.slice(startIndex, startIndex + pageSize);
-  const rangeStart = rows.length ? startIndex + 1 : 0;
-  const rangeEnd = Math.min(startIndex + pageSize, rows.length);
 
   function changeMonth(amount) {
     setMonthState((current) => shiftMonth(current.year, current.month, amount));
@@ -149,11 +147,6 @@ export default function CalendarView({
           ‹
         </button>
 
-        <div className="calendar-days-range">
-          <strong>{rangeStart}–{rangeEnd}</strong>
-          <span>/ {rows.length}</span>
-        </div>
-
         <button
           type="button"
           className="calendar-days-button"
@@ -215,12 +208,6 @@ export default function CalendarView({
             );
           })}
         </div>
-      </div>
-
-      <div className="calendar-page-dots" aria-hidden="true">
-        {Array.from({ length: pageCount }, (_, index) => (
-          <span key={index} className={index === safePage ? 'active' : ''} />
-        ))}
       </div>
 
       <button type="button" className="pdf-button calendar-pdf-button" onClick={downloadPdf}>

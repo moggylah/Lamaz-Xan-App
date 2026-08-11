@@ -33,6 +33,7 @@ export default function AzkarView({ language = 'ru', hapticsEnabled = true }) {
   const [currentIndex, setCurrentIndex] = useState(() => firstIncompleteIndex('morning', AZKAR.morning, readCounters()));
   const touchStartX = useRef(null);
   const advanceTimer = useRef(null);
+  const scrollAreaRef = useRef(null);
 
   const items = AZKAR[category] || [];
   const selectedCategory = categories.find((item) => item.key === category) || categories[0];
@@ -47,6 +48,10 @@ export default function AzkarView({ language = 'ru', hapticsEnabled = true }) {
   }, [remaining]);
 
   useEffect(() => () => window.clearTimeout(advanceTimer.current), []);
+
+  useEffect(() => {
+    scrollAreaRef.current?.scrollTo({ top: 0, behavior: 'auto' });
+  }, [category, currentIndex]);
 
   const completedCount = useMemo(
     () => items.filter((item) => remaining[makeCounterKey(category, item)] === 0).length,
@@ -176,25 +181,27 @@ export default function AzkarView({ language = 'ru', hapticsEnabled = true }) {
             <span className="azkar-repeat-label">{t(language, 'azkar.times', { count: currentItem.repetitions })}</span>
           </div>
 
-          <p className="azkar-arabic azkar-arabic-slide" dir="rtl" lang="ar">{currentItem.arabic}</p>
+          <div className="azkar-scroll-area" ref={scrollAreaRef}>
+            <p className="azkar-arabic azkar-arabic-slide" dir="rtl" lang="ar">{currentItem.arabic}</p>
 
-          <details className="azkar-details">
-            <summary>{t(language, 'azkar.details')}</summary>
-            <div className="azkar-details-body">
-              <div className="azkar-detail-block" dir="ltr">
-                <span>{t(language, 'azkar.transcription')}</span>
-                <p>{currentItem.transcription}</p>
+            <details className="azkar-details">
+              <summary>{t(language, 'azkar.details')}</summary>
+              <div className="azkar-details-body">
+                <div className="azkar-detail-block" dir="ltr">
+                  <span>{t(language, 'azkar.transcription')}</span>
+                  <p>{currentItem.transcription}</p>
+                </div>
+                <div className="azkar-detail-block azkar-translation-block">
+                  <span>{t(language, 'azkar.translation')}</span>
+                  <p>{getAzkarMeaning(currentItem, language)}</p>
+                </div>
               </div>
-              <div className="azkar-detail-block azkar-translation-block">
-                <span>{t(language, 'azkar.translation')}</span>
-                <p>{getAzkarMeaning(currentItem, language)}</p>
-              </div>
+            </details>
+
+            <div className="azkar-meta azkar-slide-meta">
+              <span>{currentItem.reference}</span>
+              <a href={AZKAR_SOURCE[category]} target="_blank" rel="noreferrer">azkar.ru</a>
             </div>
-          </details>
-
-          <div className="azkar-meta azkar-slide-meta">
-            <span>{currentItem.reference}</span>
-            <a href={AZKAR_SOURCE[category]} target="_blank" rel="noreferrer">azkar.ru</a>
           </div>
 
           <div className="azkar-counter-zone">
