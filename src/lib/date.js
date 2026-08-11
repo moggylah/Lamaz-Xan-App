@@ -31,8 +31,8 @@ const MONTHS = {
   },
 };
 
-const CE_WEEKDAYS_LONG = ['Khirande', 'Oršot', 'Šinar', 'Qaara', 'Yeara', 'Pheraskande', 'Šotde'];
-const CE_WEEKDAYS_SHORT = ['Khir.', 'Orš.', 'Šin.', 'Qaa.', 'Yea.', 'Pher.', 'Šot.'];
+const CE_WEEKDAYS_LONG = ['Khirande', 'Orşot', 'Şinara', 'Qaara', 'Yeara', 'Pheraska', 'Şot'];
+const CE_WEEKDAYS_SHORT = CE_WEEKDAYS_LONG;
 
 function weekdayIndex(date, timeZone) {
   const value = new Intl.DateTimeFormat('en-US', { weekday: 'short', timeZone }).format(date);
