@@ -2119,3 +2119,85 @@ button { -webkit-tap-highlight-color: transparent; }
 .azkar-screen {
   padding-bottom: 10px;
 }
+
+
+/* Sticky section header and azkar transcription */
+.app-frame {
+  overflow-x: clip;
+}
+
+.app-header-section {
+  position: sticky;
+  top: max(0px, env(safe-area-inset-top));
+  z-index: 80;
+  margin: 0 -16px 14px;
+  padding: 7px 16px;
+  min-height: 58px;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, backdrop-filter .2s ease;
+}
+
+.app-header-section.is-scrolled {
+  background: rgba(248, 245, 238, .76);
+  border-bottom-color: rgba(218, 214, 205, .72);
+  box-shadow: 0 9px 24px rgba(35, 47, 40, .07);
+  backdrop-filter: blur(18px) saturate(1.12);
+  -webkit-backdrop-filter: blur(18px) saturate(1.12);
+}
+
+.app-header-section.is-scrolled .icon-button {
+  background: rgba(255, 253, 248, .78);
+  border-color: rgba(23, 79, 58, .11);
+}
+
+.app-header-section .section-back-button {
+  position: relative;
+  z-index: 2;
+}
+
+.azkar-transcription-block {
+  margin: 0 0 11px;
+  padding: 10px 12px 11px;
+  border: 1px solid rgba(23, 79, 58, .07);
+  border-radius: 14px;
+  background: rgba(23, 79, 58, .045);
+  text-align: left;
+}
+
+.azkar-transcription-label {
+  display: block;
+  margin-bottom: 4px;
+  color: #8f9892;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+
+.azkar-transcription {
+  margin: 0;
+  color: #4f5d55;
+  font-size: 12px;
+  line-height: 1.58;
+  font-weight: 450;
+  direction: ltr;
+  text-align: left;
+}
+
+[dir="rtl"] .azkar-transcription-block,
+[dir="rtl"] .azkar-transcription {
+  direction: ltr;
+  text-align: left;
+}
+
+@media (max-width: 380px) {
+  .app-header-section {
+    margin-inline: -12px;
+    padding-inline: 12px;
+  }
+
+  .azkar-transcription {
+    font-size: 11.5px;
+  }
+}

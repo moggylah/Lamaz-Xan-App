@@ -238,13 +238,18 @@ export default function App() {
     );
   }
 
+  const navigateTo = (nextView) => {
+    setView(nextView);
+    requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  };
+
   return (
     <main className="app-frame">
       <Header
         dates={dates}
         view={view}
-        onHome={() => setView('prayers')}
-        onSettings={() => setView('settings')}
+        onHome={() => navigateTo('prayers')}
+        onSettings={() => navigateTo('settings')}
         language={language}
       />
 
@@ -282,7 +287,7 @@ export default function App() {
         />
       )}
 
-      <BottomNav view={view} onChange={setView} language={language}/>
+      <BottomNav view={view} onChange={navigateTo} language={language}/>
     </main>
   );
 }
