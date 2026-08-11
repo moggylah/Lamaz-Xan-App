@@ -126,9 +126,74 @@ const translations = {
 
 };
 
+
+const extraTranslations = {
+  ru: {
+    'azkar.position': '{current} из {total}',
+    'azkar.details': 'Транскрипция и перевод',
+    'azkar.translation': 'Перевод',
+    'azkar.previous': 'Предыдущий азкар',
+    'azkar.next': 'Следующий азкар',
+    'azkar.swipeHint': 'Листайте влево и вправо',
+    'settings.vibration': 'Вибрация',
+    'settings.vibrationHint': 'Счётчик азкаров и уведомления, если устройство поддерживает вибрацию',
+  },
+  en: {
+    'azkar.position': '{current} of {total}',
+    'azkar.details': 'Transcription and translation',
+    'azkar.translation': 'Translation',
+    'azkar.previous': 'Previous dhikr',
+    'azkar.next': 'Next dhikr',
+    'azkar.swipeHint': 'Swipe left or right',
+    'settings.vibration': 'Vibration',
+    'settings.vibrationHint': 'Dhikr counter and notifications when vibration is supported',
+  },
+  de: {
+    'azkar.position': '{current} von {total}',
+    'azkar.details': 'Transkription und Übersetzung',
+    'azkar.translation': 'Übersetzung',
+    'azkar.previous': 'Vorheriger Dhikr',
+    'azkar.next': 'Nächster Dhikr',
+    'azkar.swipeHint': 'Nach links oder rechts wischen',
+    'settings.vibration': 'Vibration',
+    'settings.vibrationHint': 'Dhikr-Zähler und Benachrichtigungen, sofern Vibration unterstützt wird',
+  },
+  fr: {
+    'azkar.position': '{current} sur {total}',
+    'azkar.details': 'Transcription et traduction',
+    'azkar.translation': 'Traduction',
+    'azkar.previous': 'Dhikr précédent',
+    'azkar.next': 'Dhikr suivant',
+    'azkar.swipeHint': 'Balayez vers la gauche ou la droite',
+    'settings.vibration': 'Vibration',
+    'settings.vibrationHint': 'Compteur de dhikr et notifications si la vibration est prise en charge',
+  },
+  es: {
+    'azkar.position': '{current} de {total}',
+    'azkar.details': 'Transcripción y traducción',
+    'azkar.translation': 'Traducción',
+    'azkar.previous': 'Dhikr anterior',
+    'azkar.next': 'Dhikr siguiente',
+    'azkar.swipeHint': 'Desliza a la izquierda o a la derecha',
+    'settings.vibration': 'Vibración',
+    'settings.vibrationHint': 'Contador de dhikr y notificaciones si el dispositivo admite vibración',
+  },
+  ar: {
+    'azkar.position': '{current} من {total}',
+    'azkar.details': 'النطق والترجمة',
+    'azkar.translation': 'الترجمة',
+    'azkar.previous': 'الذكر السابق',
+    'azkar.next': 'الذكر التالي',
+    'azkar.swipeHint': 'اسحب يمينًا أو يسارًا',
+    'settings.vibration': 'الاهتزاز',
+    'settings.vibrationHint': 'عداد الأذكار والإشعارات إذا كان الجهاز يدعم الاهتزاز',
+  },
+};
+
 export function t(language, key, vars = {}) {
   const dictionary = translations[language] || translations.ru;
-  let value = dictionary[key] ?? translations.ru[key] ?? key;
+  const extraDictionary = extraTranslations[language] || extraTranslations.ru;
+  let value = extraDictionary[key] ?? dictionary[key] ?? extraTranslations.ru[key] ?? translations.ru[key] ?? key;
   for (const [name, replacement] of Object.entries(vars)) {
     value = value.replaceAll(`{${name}}`, String(replacement));
   }

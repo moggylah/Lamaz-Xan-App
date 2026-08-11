@@ -4,6 +4,7 @@ import { t } from './i18n.js';
 export const DEFAULT_NOTIFICATION_PREFS = {
   enabled: false,
   leadMinutes: 0,
+  vibration: true,
   prayers: { fajr: true, dhuhr: true, asr: true, maghrib: true, isha: true, qiyam: false },
 };
 
@@ -70,7 +71,12 @@ export async function sendDueNotifications({ times, prefs, now, timeZone, mosque
     ].filter(Boolean);
 
     const shown = await displayNotification(title, {
-      body: bodyParts.join(' · '), tag, icon: '/app-icon-192.png', badge: '/app-icon-192.png', data: { url: '/' },
+      body: bodyParts.join(' · '),
+      tag,
+      icon: '/app-icon-192.png',
+      badge: '/app-icon-192.png',
+      data: { url: '/' },
+      ...(prefs.vibration !== false ? { vibrate: [180, 90, 180] } : {}),
     });
     if (shown) sent[tag] = nowMs;
   }
