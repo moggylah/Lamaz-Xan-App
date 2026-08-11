@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { formatClock } from '../lib/date.js';
-import { getLanguage, t } from '../lib/i18n.js';
+import { formatClock, formatMonthTitle, formatWeekday } from '../lib/date.js';
+import { t } from '../lib/i18n.js';
 import { buildMonthSchedule, shiftMonth } from '../lib/monthly.js';
 import { downloadMonthlySchedulePdf } from '../lib/pdf.js';
 
@@ -59,12 +59,7 @@ export default function CalendarView({
     setStartIndex(isCurrentMonth ? Math.max(0, todayParts.day - 1) : 0);
   }, [monthState.year, monthState.month, todayParts.year, todayParts.month, todayParts.day]);
 
-  const locale = getLanguage(language).locale;
-  const monthTitle = new Intl.DateTimeFormat(locale, {
-    month: 'long',
-    year: 'numeric',
-    timeZone: 'UTC',
-  }).format(new Date(Date.UTC(monthState.year, monthState.month - 1, 1)));
+  const monthTitle = formatMonthTitle(monthState.year, monthState.month, language);
 
   const safeStartIndex = Math.max(0, Math.min(startIndex, Math.max(0, rows.length - 1)));
   const visibleRows = rows.slice(safeStartIndex, safeStartIndex + pageSize);
@@ -153,10 +148,7 @@ export default function CalendarView({
               row.dateParts.month === todayParts.month &&
               row.dateParts.day === todayParts.day;
 
-            const weekday = new Intl.DateTimeFormat(locale, {
-              weekday: 'short',
-              timeZone,
-            }).format(row.date);
+            const weekday = formatWeekday(row.date, timeZone, language, true);
 
             return (
               <article
