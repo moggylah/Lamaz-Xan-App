@@ -110,14 +110,18 @@ export default function AzkarView({ language = 'ru', hapticsEnabled = true }) {
   function handleTouchStart(event) {
     const touch = event.changedTouches?.[0];
     if (!touch) return;
-    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+    touchStartRef.current = {
+      x: touch.clientX,
+      y: touch.clientY,
+      ignoreSwipe: Boolean(event.target?.closest?.('.azkar-scroll-area')),
+    };
   }
 
   function handleTouchEnd(event) {
     const start = touchStartRef.current;
     const touch = event.changedTouches?.[0];
     touchStartRef.current = null;
-    if (!start || !touch) return;
+    if (!start || !touch || start.ignoreSwipe) return;
 
     const dx = touch.clientX - start.x;
     const dy = touch.clientY - start.y;
