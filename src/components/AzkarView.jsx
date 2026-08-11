@@ -125,6 +125,12 @@ export default function AzkarView({ language = 'ru' }) {
               </div>
 
               <p className="azkar-arabic" dir="rtl" lang="ar">{item.arabic}</p>
+              {item.transcription && (
+                <div className="azkar-transcription-block" dir="ltr">
+                  <span className="azkar-transcription-label">{t(language, 'azkar.transcription')}</span>
+                  <p className="azkar-transcription">{item.transcription}</p>
+                </div>
+              )}
               <p className="azkar-meaning">{getAzkarMeaning(item, language)}</p>
 
               <div className="azkar-meta">

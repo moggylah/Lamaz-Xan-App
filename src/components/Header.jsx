@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import BrandLogo from './BrandLogo.jsx';
 import { BackIcon, GearIcon } from './Icons.jsx';
 import { t } from '../lib/i18n.js';
@@ -9,6 +10,20 @@ const titleKeys = {
 };
 
 export default function Header({ dates, onSettings, onHome, language = 'ru', view = 'prayers' }) {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    if (view === 'prayers') {
+      setScrolled(false);
+      return undefined;
+    }
+
+    const updateScrollState = () => setScrolled(window.scrollY > 10);
+    updateScrollState();
+    window.addEventListener('scroll', updateScrollState, { passive: true });
+    return () => window.removeEventListener('scroll', updateScrollState);
+  }, [view]);
+
   if (view === 'prayers') {
     return (
       <header className="app-header app-header-home">
@@ -34,7 +49,7 @@ export default function Header({ dates, onSettings, onHome, language = 'ru', vie
   }
 
   return (
-    <header className="app-header app-header-section">
+    <header className={`app-header app-header-section ${scrolled ? 'is-scrolled' : ''}`}>
       <button
         type="button"
         className="icon-button section-back-button"
