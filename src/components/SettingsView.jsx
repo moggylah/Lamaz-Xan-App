@@ -85,6 +85,18 @@ export default function SettingsView({
               </label>
             )}
 
+            <label className="notification-toggle vibration-toggle">
+              <span>
+                <strong>{t(language, 'settings.vibration')}</strong>
+                <small>{t(language, 'settings.vibrationHint')}</small>
+              </span>
+              <input
+                type="checkbox"
+                checked={notificationPrefs.vibration !== false}
+                onChange={(e) => onNotificationPrefsChange((current) => ({ ...current, vibration: e.target.checked }))}
+              />
+            </label>
+
             <label className="selector-label">{t(language, 'settings.whenNotify')}
               <select value={notificationPrefs.leadMinutes} onChange={(e) => onNotificationPrefsChange((current) => ({ ...current, leadMinutes: Number(e.target.value) }))}>
                 <option value="0">{t(language, 'settings.atTime')}</option>

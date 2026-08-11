@@ -18,7 +18,7 @@ export default function Header({ dates, onSettings, onHome, language = 'ru', vie
       return undefined;
     }
 
-    const updateScrollState = () => setScrolled(window.scrollY > 10);
+    const updateScrollState = () => setScrolled(window.scrollY > 64);
     updateScrollState();
     window.addEventListener('scroll', updateScrollState, { passive: true });
     return () => window.removeEventListener('scroll', updateScrollState);
@@ -49,15 +49,17 @@ export default function Header({ dates, onSettings, onHome, language = 'ru', vie
   }
 
   return (
-    <header className={`app-header app-header-section ${scrolled ? 'is-scrolled' : ''}`}>
-      <button
-        type="button"
-        className="icon-button section-back-button"
-        onClick={onHome}
-        aria-label={t(language, 'tab.prayers')}
-      >
-        <BackIcon size={25} />
-      </button>
+    <header className="app-header app-header-section">
+      <div className="section-back-slot">
+        <button
+          type="button"
+          className={`icon-button section-back-button ${scrolled ? 'is-floating' : ''}`}
+          onClick={onHome}
+          aria-label={t(language, 'tab.prayers')}
+        >
+          <BackIcon size={25} />
+        </button>
+      </div>
 
       <div className="section-brand">
         <BrandLogo variant="mark" className="section-brand-mark" />
