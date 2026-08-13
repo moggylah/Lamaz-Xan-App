@@ -67,10 +67,26 @@ export function getDateDisplay(date, timeZone, language = 'ru') {
   const greg = getLocalDateParts(date, timeZone);
   const hijri = getHijriParts(date, timeZone);
   const locale = getLanguage(code).locale;
+  const weekday = formatWeekday(date, timeZone, code, false);
+
+  let headline;
+  if (code === 'ce') {
+    headline = `${weekday}, ${greg.day} ${MONTHS.ce.gregorian[greg.month - 1]}`;
+  } else {
+    headline = new Intl.DateTimeFormat(locale, {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      timeZone,
+    }).format(date);
+    headline = headline.charAt(0).toLocaleUpperCase(locale) + headline.slice(1);
+  }
+
   return {
     gregorian: `${greg.day} ${MONTHS[code].gregorian[greg.month - 1]} ${greg.year}`,
     hijri: `${hijri.day} ${MONTHS[code].hijri[hijri.month - 1]} ${hijri.year}`,
-    weekday: formatWeekday(date, timeZone, code, false),
+    weekday,
+    headline,
   };
 }
 
