@@ -114,7 +114,6 @@ export function downloadMonthlySchedulePdf({
   month,
   timeZone,
   language,
-  sourceName = '',
 }) {
   const monthTitle = formatMonthTitle(year, month, language);
 
@@ -139,16 +138,6 @@ export function downloadMonthlySchedulePdf({
   ctx.textAlign = 'center';
   ctx.fillText(`${t(language, 'calendar.pdfTitle')} — ${monthTitle}`, width / 2, 160);
 
-  ctx.fillStyle = '#737b75';
-  ctx.font = '400 25px Arial, sans-serif';
-  ctx.fillText(
-    sourceName
-      ? `${t(language, 'calendar.source')}: ${sourceName}`
-      : t(language, 'calendar.calculatedSource'),
-    width / 2,
-    204,
-  );
-
   const prayerKeys = ['fajr', 'sunrise', 'duha', 'dhuhr', 'asr', 'maghrib', 'isha', 'qiyam'];
   const headers = [
     t(language, 'calendar.date'),
@@ -156,7 +145,7 @@ export function downloadMonthlySchedulePdf({
   ];
 
   const left = 72;
-  const top = 250;
+  const top = 210;
   const tableWidth = width - left * 2;
   const dateWidth = 260;
   const otherWidth = (tableWidth - dateWidth) / prayerKeys.length;
