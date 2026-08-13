@@ -1,5 +1,5 @@
 import {
-  CheckIcon, CurrentIcon, EmptyCircleIcon, MoonIcon, StarIcon, SunIcon, SunriseIcon, SunsetIcon,
+  CalendarIcon, CheckIcon, CurrentIcon, DhikrIcon, EmptyCircleIcon, MoonIcon, QiblaIcon, StarIcon, SunIcon, SunriseIcon, SunsetIcon,
 } from './Icons.jsx';
 import { formatClock } from '../lib/date.js';
 import { getPastStatus } from '../lib/prayer.js';
@@ -25,7 +25,7 @@ function formatCountdown(ms) {
   return [hours, minutes, seconds].map((value) => String(value).padStart(2, '0')).join(':');
 }
 
-export default function PrayerTimesView({ times, timeZone, now, nextFard, iqamahTimes = {}, mosqueName = '', language = 'ru' }) {
+export default function PrayerTimesView({ times, timeZone, now, nextFard, iqamahTimes = {}, mosqueName = '', language = 'ru', onNavigate }) {
   const nextTime = nextFard.time;
 
   return (
@@ -46,6 +46,21 @@ export default function PrayerTimesView({ times, timeZone, now, nextFard, iqamah
           <MoonIcon size={112} />
         </div>
       </div>
+
+      <nav className="home-section-menu" aria-label={t(language, 'aria.sections')}>
+        <button type="button" onClick={() => onNavigate?.('qibla')}>
+          <span className="home-section-menu-icon"><QiblaIcon size={24} /></span>
+          <span>{t(language, 'tab.qibla')}</span>
+        </button>
+        <button type="button" onClick={() => onNavigate?.('azkar')}>
+          <span className="home-section-menu-icon"><DhikrIcon size={24} /></span>
+          <span>{t(language, 'tab.azkar')}</span>
+        </button>
+        <button type="button" onClick={() => onNavigate?.('calendar')}>
+          <span className="home-section-menu-icon"><CalendarIcon size={24} /></span>
+          <span>{t(language, 'tab.calendar')}</span>
+        </button>
+      </nav>
 
       <div className="schedule-heading">
         <div>

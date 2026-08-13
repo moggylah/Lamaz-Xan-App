@@ -69,14 +69,7 @@ export default function Header({ dates, onSettings, onHome, language = 'ru', vie
         </div>
       </div>
 
-      <button
-        type="button"
-        className="icon-button settings-button"
-        onClick={onSettings}
-        aria-label={t(language, 'aria.settings')}
-      >
-        <GearIcon size={28} />
-      </button>
+      <span className="section-header-spacer" aria-hidden="true" />
     </header>
   );
 }

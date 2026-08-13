@@ -132,7 +132,6 @@ export default function MosqueSelector({ selectedMosque, onSelect, onClear, onLo
           ))}
         </div>
       )}
-      <p className="provider-note">{t(language, 'mosque.provider')}</p>
     </div>
   );
 }

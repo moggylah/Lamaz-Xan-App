@@ -101,7 +101,6 @@ export default function CalendarView({
       month: monthState.month,
       timeZone,
       language,
-      sourceName: selectedMosque?.name || '',
     });
   }
 
@@ -119,11 +118,6 @@ export default function CalendarView({
 
         <div className="calendar-month-title">
           <h2>{monthTitle}</h2>
-          <span>
-            {selectedMosque?.name
-              ? t(language, 'calendar.mosqueSource', { mosque: selectedMosque.name })
-              : t(language, 'calendar.calculatedSource')}
-          </span>
         </div>
 
         <button

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { CheckIcon } from './Icons.jsx';
-import { AZKAR, AZKAR_SOURCE, getAzkarMeaning, getAzkarName } from '../lib/azkar.js';
+import { AZKAR, getAzkarMeaning, getAzkarName } from '../lib/azkar.js';
 import { triggerHaptic } from '../lib/haptics.js';
 import { t } from '../lib/i18n.js';
 
@@ -31,6 +31,8 @@ export default function AzkarView({ language = 'ru', hapticsEnabled = true }) {
   const [category, setCategory] = useState('morning');
   const [remaining, setRemaining] = useState(readCounters);
   const [currentIndex, setCurrentIndex] = useState(() => firstIncompleteIndex('morning', AZKAR.morning, readCounters()));
+  const [transcriptionOpen, setTranscriptionOpen] = useState(true);
+  const [translationOpen, setTranslationOpen] = useState(true);
   const touchStartRef = useRef(null);
   const advanceTimer = useRef(null);
   const scrollAreaRef = useRef(null);
@@ -51,6 +53,8 @@ export default function AzkarView({ language = 'ru', hapticsEnabled = true }) {
 
   useEffect(() => {
     scrollAreaRef.current?.scrollTo({ top: 0, behavior: 'auto' });
+    setTranscriptionOpen(true);
+    setTranslationOpen(true);
   }, [category, currentIndex]);
 
   const completedCount = useMemo(
@@ -186,24 +190,27 @@ export default function AzkarView({ language = 'ru', hapticsEnabled = true }) {
           <div className="azkar-scroll-area" ref={scrollAreaRef}>
             <p className="azkar-arabic azkar-arabic-slide" dir="rtl" lang="ar">{currentItem.arabic}</p>
 
-            <details className="azkar-details">
-              <summary>{t(language, 'azkar.details')}</summary>
-              <div className="azkar-details-body">
-                <div className="azkar-detail-block" dir="ltr">
-                  <span>{t(language, 'azkar.transcription')}</span>
+            <div className="azkar-folds">
+              <details className="azkar-fold" open={transcriptionOpen} onToggle={(event) => setTranscriptionOpen(event.currentTarget.open)}>
+                <summary>{t(language, 'azkar.transcription')}</summary>
+                <div className="azkar-fold-content" dir="ltr">
                   <p>{currentItem.transcription}</p>
                 </div>
-                <div className="azkar-detail-block azkar-translation-block">
-                  <span>{t(language, 'azkar.translation')}</span>
+              </details>
+
+              <details className="azkar-fold azkar-translation-fold" open={translationOpen} onToggle={(event) => setTranslationOpen(event.currentTarget.open)}>
+                <summary>{t(language, 'azkar.translation')}</summary>
+                <div className="azkar-fold-content">
                   <p>{getAzkarMeaning(currentItem, language)}</p>
                 </div>
-              </div>
-            </details>
-
-            <div className="azkar-meta azkar-slide-meta">
-              <span>{currentItem.reference}</span>
-              <a href={AZKAR_SOURCE[category]} target="_blank" rel="noreferrer">azkar.ru</a>
+              </details>
             </div>
+
+            {currentItem.reference && (
+              <div className="azkar-meta azkar-slide-meta">
+                <span>{currentItem.reference}</span>
+              </div>
+            )}
           </div>
 
           <div className="azkar-counter-zone">
