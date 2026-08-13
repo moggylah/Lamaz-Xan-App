@@ -3067,3 +3067,150 @@ button { -webkit-tap-highlight-color: transparent; }
     font-size: 10px;
   }
 }
+
+
+/* Approved main-header redesign: logo + compact two-line date, no date card */
+.app-header-home {
+  margin-bottom: 24px;
+}
+
+.app-header-home .brand-row {
+  min-height: 104px;
+  padding-inline: 52px;
+}
+
+.app-header-home .brand-row .header-logo {
+  width: min(222px, 100%);
+  max-height: 86px;
+  object-fit: contain;
+}
+
+.app-header-home .brand-row .settings-button {
+  width: 48px;
+  height: 48px;
+  border-radius: 17px;
+  background: rgba(255, 253, 248, .72);
+  border-color: rgba(23, 79, 58, .075);
+  box-shadow: 0 7px 20px rgba(34, 49, 41, .055);
+}
+
+.date-display {
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  margin: 8px auto 0;
+  text-align: center;
+}
+
+.date-headline {
+  color: var(--green);
+  font-size: 17px;
+  line-height: 1.25;
+  font-weight: 650;
+  letter-spacing: -.012em;
+}
+
+.date-hijri-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  min-width: 238px;
+  color: #7a827d;
+}
+
+.date-hijri {
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 480;
+  white-space: nowrap;
+}
+
+.date-ornament {
+  position: relative;
+  width: 48px;
+  height: 8px;
+  flex: 0 0 48px;
+}
+
+.date-ornament::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 34px;
+  height: 1px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent, rgba(181, 139, 69, .68));
+}
+
+.date-ornament::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  background: rgba(181, 139, 69, .72);
+  transform: translateY(-50%) rotate(45deg);
+  border-radius: 1px;
+}
+
+.date-ornament-left::before {
+  right: 7px;
+}
+
+.date-ornament-left::after {
+  right: 1px;
+}
+
+.date-ornament-right {
+  transform: scaleX(-1);
+}
+
+@media (max-width: 380px) {
+  .app-header-home {
+    margin-bottom: 20px;
+  }
+
+  .app-header-home .brand-row {
+    min-height: 94px;
+    padding-inline: 46px;
+  }
+
+  .app-header-home .brand-row .header-logo {
+    width: min(194px, 100%);
+    max-height: 76px;
+  }
+
+  .app-header-home .brand-row .settings-button {
+    width: 44px;
+    height: 44px;
+    border-radius: 16px;
+  }
+
+  .date-display {
+    margin-top: 5px;
+    gap: 6px;
+  }
+
+  .date-headline {
+    font-size: 15.5px;
+  }
+
+  .date-hijri-line {
+    min-width: 210px;
+    gap: 9px;
+  }
+
+  .date-hijri {
+    font-size: 13px;
+  }
+
+  .date-ornament {
+    width: 40px;
+    flex-basis: 40px;
+  }
+
+  .date-ornament::before {
+    width: 28px;
+  }
+}
