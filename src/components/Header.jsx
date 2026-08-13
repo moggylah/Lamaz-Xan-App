@@ -39,10 +39,13 @@ export default function Header({ dates, onSettings, onHome, language = 'ru', vie
           </button>
         </div>
 
-        <div className="date-panel" aria-label={t(language, 'aria.date')}>
-          <div className="date-primary">{dates.gregorian}</div>
-          <div className="date-secondary">{dates.hijri}</div>
-          <div className="date-weekday">{dates.weekday}</div>
+        <div className="date-display" aria-label={t(language, 'aria.date')}>
+          <div className="date-headline">{dates.headline}</div>
+          <div className="date-hijri-line">
+            <span className="date-ornament date-ornament-left" aria-hidden="true" />
+            <span className="date-hijri">{dates.hijri}</span>
+            <span className="date-ornament date-ornament-right" aria-hidden="true" />
+          </div>
         </div>
       </header>
     );
