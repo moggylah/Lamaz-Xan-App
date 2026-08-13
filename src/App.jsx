@@ -4,7 +4,6 @@ import Header from './components/Header.jsx';
 import PrayerTimesView from './components/PrayerTimesView.jsx';
 import QiblaCompass from './components/QiblaCompass.jsx';
 import SettingsView from './components/SettingsView.jsx';
-import BottomNav from './components/BottomNav.jsx';
 import CalendarView from './components/CalendarView.jsx';
 import AzkarView from './components/AzkarView.jsx';
 import { addCalendarDays, getDateDisplay, getLocalDateParts } from './lib/date.js';
@@ -262,6 +261,7 @@ export default function App() {
           iqamahTimes={iqamahTimes}
           mosqueName={todayMosqueDay ? selectedMosque?.name : ''}
           language={language}
+          onNavigate={navigateTo}
         />
       )}
 
@@ -287,7 +287,6 @@ export default function App() {
         />
       )}
 
-      <BottomNav view={view} onChange={navigateTo} language={language}/>
     </main>
   );
 }

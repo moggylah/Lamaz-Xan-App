@@ -2922,3 +2922,148 @@ button { -webkit-tap-highlight-color: transparent; }
     height: clamp(380px, calc(100dvh - 315px), 530px);
   }
 }
+
+/* Main-screen section menu + simplified secondary navigation */
+.home-section-menu {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 10px 0 15px;
+}
+
+.home-section-menu button {
+  min-width: 0;
+  min-height: 72px;
+  padding: 10px 6px 9px;
+  border: 1px solid rgba(225, 220, 210, .92);
+  border-radius: 18px;
+  background: rgba(255, 253, 248, .68);
+  color: var(--green);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 7px 18px rgba(37, 51, 43, .035);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.home-section-menu button:active {
+  transform: scale(.98);
+  background: var(--green-soft);
+}
+
+.home-section-menu-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(23, 79, 58, .065);
+}
+
+.home-section-menu button > span:last-child {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 680;
+}
+
+.section-header-spacer {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+}
+
+/* Transcription and translation are visible by default, each with its own shutter */
+.azkar-folds {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+
+.azkar-fold {
+  overflow: hidden;
+  border: 1px solid rgba(23, 79, 58, .09);
+  border-radius: 14px;
+  background: rgba(23, 79, 58, .035);
+}
+
+.azkar-fold summary {
+  position: relative;
+  padding: 10px 36px 10px 12px;
+  list-style: none;
+  color: var(--green);
+  font-size: 10.5px;
+  font-weight: 750;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.azkar-fold summary::-webkit-details-marker {
+  display: none;
+}
+
+.azkar-fold summary::after {
+  content: '⌄';
+  position: absolute;
+  inset-inline-end: 12px;
+  top: 50%;
+  transform: translateY(-54%);
+  font-size: 17px;
+  line-height: 1;
+  transition: transform .18s ease;
+}
+
+.azkar-fold[open] summary::after {
+  transform: translateY(-46%) rotate(180deg);
+}
+
+.azkar-fold-content {
+  padding: 0 12px 11px;
+  border-top: 1px solid rgba(23, 79, 58, .07);
+}
+
+.azkar-fold-content p {
+  margin: 9px 0 0;
+  color: #4e5b54;
+  font-size: 12px;
+  line-height: 1.62;
+}
+
+.azkar-translation-fold .azkar-fold-content p {
+  color: #3f4b45;
+}
+
+[dir="rtl"] .azkar-fold summary {
+  padding: 10px 12px 10px 36px;
+}
+
+[dir="rtl"] .azkar-fold-content[dir="ltr"] {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Source/provider labels are intentionally not shown in the UI. */
+.provider-note,
+.schedule-source {
+  display: none !important;
+}
+
+@media (max-width: 380px) {
+  .home-section-menu {
+    gap: 6px;
+  }
+
+  .home-section-menu button {
+    min-height: 66px;
+    border-radius: 16px;
+  }
+
+  .home-section-menu button > span:last-child {
+    font-size: 10px;
+  }
+}
